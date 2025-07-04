@@ -33,4 +33,4 @@ $ python3 main.py
 ```
 
 ### What's next:
-- Add UI input using Graphana or any frontend framework.
+- [ ] Add UI input using Graphana or any frontend framework.
