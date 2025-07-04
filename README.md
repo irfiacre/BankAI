@@ -8,28 +8,28 @@ Install `OLLAMA` to run models used here locally ([Link](https://ollama.com/down
 Pull these new models:
 
 ```bash
-$ ollama pull llama3.2
+ollama pull llama3.2
 ```
 
 ```bash
-$ ollama pull mxbai-embed-large
+ollama pull mxbai-embed-large
 ```
 
 ### Install requirements
 
 ```bash
-$ python3 -m venv venv && source venv/bin/activate 
+python3 -m venv venv && source venv/bin/activate 
 ```
 > If it does not work just create a virtual environment and activate it
 
 ```bash
-$ pip3 install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### Start main application
 
 ```bash
-$ python3 main.py
+python3 main.py
 ```
 
 ### What's next:
