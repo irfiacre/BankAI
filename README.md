@@ -26,11 +26,11 @@ python3 -m venv venv && source venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-### Start main application
+## Start main application
 
 ```bash
 python3 main.py
 ```
 
-### What's next:
+## What's next:
 - [ ] Add UI input using Graphana or any frontend framework.
