@@ -20,7 +20,7 @@ $ ollama pull mxbai-embed-large
 ```bash
 $ python3 -m venv venv && source venv/bin/activate 
 ```
-> !If it does not work just create a virtual environment and activate it
+> If it does not work just create a virtual environment and activate it
 
 ```bash
 $ pip3 install -r requirements.txt
