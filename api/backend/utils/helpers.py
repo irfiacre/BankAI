@@ -9,5 +9,4 @@ def count_track(file_path:str , count:int = None):
         return None
     with open(file_path, 'r') as f:
         content = f.read().strip()
-        print('---------->', content)
         return int(content)

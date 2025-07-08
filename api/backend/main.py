@@ -15,15 +15,10 @@ Here is a question to answer: {question}
 prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
-while True:
-    print("\n\n=====================================")
-    question = input("Enter question (q for quit): ")
-    if question == 'q':
-        break
-
+def ask_question(question: str) -> str:
     result = chain.invoke({
         "records": retriever.invoke(question),
         "question": question
     })
 
-    print(result)
+    return result
