@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Dashboard = ({content}: {content: Array<any>}) => {
-    console.log(content)
+    console.log('---------',content)
     
     return (
         <div>

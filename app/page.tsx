@@ -11,61 +11,59 @@ export default function Home() {
   });
   const [file, setFile] = useState<any>(null);
   const [fileContent, setFileContent] = useState<Array<any>>([]);
-  console.log("->>>", file);
 
   const handleImageChange = (e: any) => {
     e.preventDefault();
     setFile(e.target.files[0]);
   };
-  
+
   useEffect(() => {
-    // let result: any;
     (async () => {
       const result = await get_data("statement");
       setFileContent(result);
     })();
-    
   }, [file]);
-
-  console.log("------->>>>", fileContent);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 text-gray-700">
       <section></section>
-{     state.file? <section className="flex space-y-5 items-center justify-center flex-col">
-        <h1 className="text-5xl">
-          {" "}
-          Welcome to <strong className="">
+      {!file ? (
+        <section className="flex space-y-5 items-center justify-center flex-col">
+          <h1 className="text-5xl">
             {" "}
-            Bank Statement Analyzer{" "}
-          </strong>{" "}
-        </h1>
-        <h1 className="text-2xl text-gray-400 text-center font-light">
-          {" "}
-          - Get started By Uploading your Bank Statement -{" "}
-        </h1>
-        <div className="w-full">
-          <div
-            className={`cursor-pointer p-5 ${
-              state.file ? "bg-backgroundColor" : "bg-primary/5"
-            } border border-borderColorLight rounded-md`}
-          >
-            <input
-              type="file"
-              name="file"
-              onChange={handleImageChange}
-              className="cursor-pointer"
-              accept=".csv"
-              disabled={!!state.file}
-            />
-            {!state.file && (
-              <span className="w-full text-xs text-gray-400 font-normal">
-                File must be .csv (ex: bank_statement.csv) 😅
-              </span>
-            )}
+            Welcome to <strong className="">
+              {" "}
+              Bank Statement Analyzer{" "}
+            </strong>{" "}
+          </h1>
+          <h1 className="text-2xl text-gray-400 text-center font-light">
+            {" "}
+            - Get started By Uploading your Bank Statement -{" "}
+          </h1>
+          <div className="w-full">
+            <div
+              className={`cursor-pointer p-5 ${state.file ? "bg-backgroundColor" : "bg-primary/5"
+                } border border-borderColorLight rounded-md`}
+            >
+              <input
+                type="file"
+                name="file"
+                onChange={handleImageChange}
+                className="cursor-pointer"
+                accept=".csv"
+                disabled={!!state.file}
+              />
+              {!state.file && (
+                <span className="w-full text-xs text-gray-400 font-normal">
+                  File must be .csv (ex: bank_statement.csv) 😅
+                </span>
+              )}
+            </div>
           </div>
-        </div>
-      </section>: <Dashboard content={fileContent} />}
+        </section>
+      ) : (
+        <Dashboard content={fileContent} />
+      )}
       <section></section>
     </main>
   );
