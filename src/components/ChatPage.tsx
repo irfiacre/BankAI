@@ -4,37 +4,49 @@ import BaseCard from "./BaseCard";
 import ChatPartner from "./chat/ChatPartner";
 import ChatTemplate from "./chat/ChatTemplate";
 import ChatBubble from "./chat/ChatBubble";
-
-const ChatPage = ({ sender }: { sender: any }) => {
-  const [messages, setMessages] = useState<any>([]);
-
-  const handleClickChartPartner = (partner: any) => {};
+import { ask_question } from "../service";
+interface Message {
+  text: string;
+  isAI: boolean;
+}
+const ChatPage = () => {
+  const [messages, setMessages] = useState<Array<Message>>([]);
+  const [asking, setAsking] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     console.log("------");
   }, []);
 
-  const onSend = useCallback((messageText: string) => {
-    console.log("========>");
+  const onSend = useCallback(async (messageText: string) => {
+    setMessages((prevState: Array<Message>) => [
+      ...prevState,
+      {
+        text: messageText,
+        isAI: false,
+      },
+    ]);
+    setAsking(true);
+    const response = await ask_question(messageText);
+
+    setAsking(false);
+    setMessages((prevState: Array<Message>) => [
+      ...prevState,
+      {
+        text: response.answer,
+        isAI: true,
+      },
+    ]);
   }, []);
-  console.log(messages);
+      console.log("========>", messages);
+
 
   return (
     <div>
-      <BaseCard className="w-full px-10 py-5">
-        <ChatTemplate
-          photoUrl={"https://i.pravatar.cc/450?u=23"}
-          name={"John Doe"}
-          handleSendMessage={onSend}
-        >
+      <BaseCard className="w-full border border-backgroundColor2">
+        <ChatTemplate handleSendMessage={onSend} isAsking={asking}>
           {messages.map((msg: any) => (
             <div key={msg._id}>
-              <ChatBubble
-                name={`${msg.user.firstName} ${msg.user.lastName}`}
-                message={msg.text}
-                time={msg.createdAt}
-                isSent={sender.userId === msg.senderId}
-              />
+              <ChatBubble message={msg.text} isAI={msg.isAI} />
             </div>
           ))}
         </ChatTemplate>

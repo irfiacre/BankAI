@@ -1,19 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
 import ChatInput from "../ChatInput";
+import { Icon } from "@iconify/react";
 
 interface ChatTemplateProps {
-  photoUrl: string;
-  name: string;
   children: any;
+  isAsking: boolean;
   handleSendMessage: (message: string) => void;
 }
 
 const ChatTemplate = ({
-  photoUrl,
-  name,
   children,
+  isAsking,
   handleSendMessage,
 }: ChatTemplateProps) => {
   const [message, setMessage] = useState<string>("");
@@ -23,37 +21,42 @@ const ChatTemplate = ({
     setMessage(e.target.value);
   };
 
+  const handleSend = () => {
+    handleSendMessage(message);
+    setMessage("");
+  };
+  
   return (
     <div>
-      <div className="py-3.5 flex flex-row justify-start items-center gap-5">
+      <div className="px-5 py-5 flex flex-row justify-start items-center gap-5">
         <div>
-          <Image
-            className="rounded-full w-20 h-20 object-cover bg-textLightColor border border-borderColorLight"
-            loader={() => photoUrl}
-            src={photoUrl}
-            alt="Applicant photo"
-            height={100}
-            width={100}
-            unoptimized
+          <Icon
+            icon="mingcute:ai-line"
+            fontSize={42}
+            className="text-textLightColor"
           />
         </div>
         <div>
-          <p className="text-textLightColor text-lg font-medium">{name}</p>
-          <p className="text-sm text-textLightColor font-extralight">
-            <span className="absolute mt-1 w-3.5 h-3.5 bg-successGreen rounded-full"></span>
-            <span className="ml-5">Online</span>
+          <p className="text-textLightColor text-xl font-light">
+            Chat with <strong>Banka</strong>
           </p>
         </div>
       </div>
       <hr />
-      <div className="py-1.5 space-y-3 h-[50vh] overflow-auto">{children}</div>
+      <div className="py-1.5 space-y-3 h-[70vh] overflow-auto bg-primary/10">
+        {children}
+      </div>
       <hr />
-      <div className="py-1.5">
-        <ChatInput
-          value={message}
-          onInputChange={handleInputChange}
-          handleSendMessage={() => handleSendMessage(message)}
-        />
+      <div className="py-5">
+        {isAsking ? (
+          <span>Asking</span>
+        ) : (
+          <ChatInput
+            value={message}
+            onInputChange={handleInputChange}
+            handleSendMessage={handleSend}
+          />
+        )}
       </div>
     </div>
   );

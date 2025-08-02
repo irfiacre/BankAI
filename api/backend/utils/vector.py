@@ -3,7 +3,7 @@ from langchain_chroma import Chroma
 from langchain_core.documents import Document
 import os
 import pandas as pd
-from utils.helpers import count_track, STATEMENT_PATH
+from api.backend.utils.helpers import count_track, STATEMENT_PATH
 
 DB_LOCATION = 'data/chroma_db'
 COUNT_PATH = 'data/count.txt'

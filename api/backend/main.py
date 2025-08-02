@@ -1,6 +1,6 @@
 from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-from utils.vector import retriever
+from api.backend.utils.vector import retriever
 
 model = OllamaLLM(model="llama3.2")
 
@@ -9,7 +9,7 @@ You are a financial expert in analyzing and answering questions about any bank s
 
 Here are some bank statement transaction records: {records}
 
-Here is a question to answer: {question}
+Here is a question to answer: {question}, format the response in a pretty easy to understand markdown view
 """
 
 prompt = ChatPromptTemplate.from_template(template)

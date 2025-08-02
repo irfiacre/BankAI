@@ -1,53 +1,52 @@
-import Image from "next/image";
+import { Icon } from "@iconify/react";
 import React from "react";
+import ReactMarkdown from "react-markdown";
 
 const ChatBubble = ({
-  name,
   message,
-  isSent,
-  time,
+  isAI,
 }: //   receiver,
 {
-  name: string;
   message: string;
-  isSent?: boolean;
-  time?: string;
+  isAI?: boolean;
 }) => {
   return (
-    <div>
+    <div className="p-2.5">
       <div
         className={`flex items-start gap-2.5 ${
-          isSent ? "justify-end" : "justify-start"
+          !isAI ? "justify-end" : "justify-start"
         }`}
       >
         <div
-          className={`flex flex-col w-full max-w-[320px] leading-1.5 p-4 rounded-e-xl rounded-es-xl ${
-            isSent ? "bg-primary" : "border-gray-200 bg-gray-100"
+          className={`flex flex-col w-full leading-1.5 p-4 rounded-e-xl rounded-es-xl ${
+            isAI ? "bg-primary" : "bg-white max-w-[320px]"
           }`}
         >
-          <div className="flex items-center space-x-2 rtl:space-x-reverse">
-            <span
-              className={`text-sm font-bold text-textDarkColor ${
-                isSent ? "text-white" : "text-textDarkColor"
+          {isAI ? (
+            <ReactMarkdown>{message}</ReactMarkdown>
+          ) : (
+            <p
+              className={`text-base font-normal py-2.5 text-textDarkColor ${
+                isAI ? "text-white" : "text-black"
               }`}
             >
-              {name}
-            </span>
-          </div>
-          <p
-            className={`text-base font-normal py-2.5 text-textDarkColor ${
-              isSent ? "text-white" : "text-textDarkColor"
-            }`}
-          >
-            {message}
-          </p>
-          <div
-            className={`flex justify-between items-center text-sm font-light ${
-              isSent ? "text-borderColorLight" : "text-borderColorLight"
-            }`}
-          >
-            <span className="font-extralight">sent</span>
-          </div>
+              {message}
+            </p>
+          )}
+          {isAI && (
+            <div
+              className={`flex justify-between items-center text-sm font-light ${
+                isAI ? "text-borderColorLight" : "text-borderColorLight"
+              }`}
+            >
+              <span className="font-extralight">Banka</span>
+              <Icon
+                icon="hugeicons:ai-magic"
+                fontSize={20}
+                className="text-textLightColor"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

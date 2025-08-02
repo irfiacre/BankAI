@@ -9,7 +9,7 @@ const BaseCard = ({
 }) => {
   return (
     <div
-      className={`w-full bg-white border border-backgroundColor2 rounded-lg ${className}`}
+      className={`w-full bg-white rounded-lg ${className}`}
     >
       {children}
     </div>

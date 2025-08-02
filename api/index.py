@@ -1,6 +1,8 @@
 from fastapi import FastAPI
+from api.backend.main import ask_question
 from api.backend.utils.helpers import format_statement_data
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 ### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
@@ -15,10 +17,15 @@ app.add_middleware(
     allow_headers=origins
 )
 
-@app.get("/api/py/helloFastApi")
-def hello_fast_api():
-    return {"message": "Hello from FastAPI"}
+class QuestionRequest (BaseModel):
+    question: str
 
 @app.get("/api/py/statement/")
 def hello_fast_api():
     return {"result": format_statement_data()}
+
+@app.post("/api/py/ask/")
+def hello_fast_api(req: QuestionRequest):
+    print("===========",req.question)
+    response = ask_question(req.question)
+    return {"answer": response}
