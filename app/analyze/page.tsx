@@ -3,8 +3,8 @@ import React from "react";
 import ChatPage from "@/src/components/ChatPage";
 import TransactionsTable from "@/src/components/TransactionsTable";
 import { Layout, Model } from "flexlayout-react";
-import "flexlayout-react/style/rounded.css";
 import { flexConfiguration } from "@/src/utils/helpers";
+import "flexlayout-react/style/rounded.css";
 
 const model = Model.fromJson(flexConfiguration);
 
