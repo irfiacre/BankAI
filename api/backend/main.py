@@ -9,7 +9,7 @@ You are a financial expert in analyzing and answering questions about any bank s
 
 Here are some bank statement transaction records: {records}
 
-Here is a question to answer: {question}, format the response in a pretty easy to understand markdown view
+Here is a question to answer: {question}, Please format the response in an easy to parse markdown.
 """
 
 prompt = ChatPromptTemplate.from_template(template)

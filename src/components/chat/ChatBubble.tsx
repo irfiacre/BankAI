@@ -1,6 +1,8 @@
 import { Icon } from "@iconify/react";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
+
 
 const ChatBubble = ({
   message,
@@ -19,15 +21,17 @@ const ChatBubble = ({
       >
         <div
           className={`flex flex-col w-full leading-1.5 p-4 rounded-e-xl rounded-es-xl ${
-            isAI ? "bg-primary" : "bg-white max-w-[320px]"
+            isAI ? "bg-white" : "max-w-[320px]"
           }`}
         >
           {isAI ? (
-            <ReactMarkdown>{message}</ReactMarkdown>
+            <ReactMarkdown
+             remarkPlugins={[remarkGfm]}
+             >{message}</ReactMarkdown>
           ) : (
             <p
               className={`text-base font-normal py-2.5 text-textDarkColor ${
-                isAI ? "text-white" : "text-black"
+                 "text-black"
               }`}
             >
               {message}

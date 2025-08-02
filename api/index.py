@@ -4,7 +4,6 @@ from api.backend.utils.helpers import format_statement_data
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-### Create FastAPI instance with custom docs and openapi url
 app = FastAPI(docs_url="/api/py/docs", openapi_url="/api/py/openapi.json")
 
 origins = ['*']
@@ -26,6 +25,5 @@ def hello_fast_api():
 
 @app.post("/api/py/ask/")
 def hello_fast_api(req: QuestionRequest):
-    print("===========",req.question)
     response = ask_question(req.question)
     return {"answer": response}

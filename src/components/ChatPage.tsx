@@ -27,8 +27,9 @@ const ChatPage = () => {
     ]);
     setAsking(true);
     const response = await ask_question(messageText);
-
     setAsking(false);
+    console.log("---->", response.answer);
+    
     setMessages((prevState: Array<Message>) => [
       ...prevState,
       {
@@ -37,12 +38,11 @@ const ChatPage = () => {
       },
     ]);
   }, []);
-      console.log("========>", messages);
 
 
   return (
     <div>
-      <BaseCard className="w-full border border-backgroundColor2">
+      <BaseCard className="w-full">
         <ChatTemplate handleSendMessage={onSend} isAsking={asking}>
           {messages.map((msg: any) => (
             <div key={msg._id}>

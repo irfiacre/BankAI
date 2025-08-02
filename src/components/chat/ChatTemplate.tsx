@@ -25,7 +25,7 @@ const ChatTemplate = ({
     handleSendMessage(message);
     setMessage("");
   };
-  
+
   return (
     <div>
       <div className="px-5 py-5 flex flex-row justify-start items-center gap-5">
@@ -49,7 +49,9 @@ const ChatTemplate = ({
       <hr />
       <div className="py-5">
         {isAsking ? (
-          <span>Asking</span>
+          <div className="flex items-center justify-center">
+            <Icon icon="eos-icons:three-dots-loading" fontSize={100} className="text-primary"/>
+          </div>
         ) : (
           <ChatInput
             value={message}

@@ -1,6 +1,12 @@
+"use client";
+import React from "react";
 import ChatPage from "@/src/components/ChatPage";
 import TransactionsTable from "@/src/components/TransactionsTable";
-import React from "react";
+import { Layout, Model } from "flexlayout-react";
+import "flexlayout-react/style/rounded.css";
+import { flexConfiguration } from "@/src/utils/helpers";
+
+const model = Model.fromJson(flexConfiguration);
 
 const Page = () => {
   const content: Array<any> = [
@@ -34,16 +40,16 @@ const Page = () => {
     },
   ];
 
-  return (
-    <div className="flex flex-row max-md:flex-col gap-2 text-textDarkColor max-h-svh">
-      <div className="w-full">
-        <TransactionsTable data={content} />
-      </div>
-      <div className="w-3/4">
-        <ChatPage />
-      </div>
-    </div>
-  );
+  const factory = (node: any) => {
+    const component = node.getComponent();
+
+    if (component === "chat") {
+      return <ChatPage />;
+    }
+    return <TransactionsTable data={content} />;
+  };
+
+  return <Layout model={model} factory={factory} realtimeResize={true} />;
 };
 
 export default Page;
