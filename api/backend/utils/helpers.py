@@ -25,5 +25,5 @@ def format_statement_data():
     df = pd.read_csv(STATEMENT_PATH)
     df = df.where(pd.notna(df), None)
     df.columns = [to_camel_case(col) for col in df.columns]
-
+    
     return df.to_dict(orient='records')

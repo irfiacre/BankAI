@@ -1,5 +1,7 @@
 export const formatPrice = (num: number | string): string => {
-  return Number(num).toLocaleString(undefined, { maximumFractionDigits: 0 });
+  return Number(num.slice(1)).toLocaleString(undefined, {
+    maximumFractionDigits: 0,
+  });
 };
 
 export const flexConfiguration = {

@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const result = await get_data("statement");
-      dispatch(setContent(result));
+      dispatch(setContent(result.result));
     })();
   }, [file]);
 

@@ -47,14 +47,14 @@ const AnalyzePage = () => {
   if (!contentStore.content) {
     router.push("/");
   }
-  console.log("----->", contentStore);
-  
+  console.log("----->", contentStore.content);
+
   const factory = (node: any) => {
     const component = node.getComponent();
     if (component === "chat") {
       return <ChatPage />;
     }
-    return <TransactionsTable data={content} />;
+    return <TransactionsTable data={contentStore.content} />;
   };
 
   return <Layout model={model} factory={factory} realtimeResize={true} />;
