@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/store/StoreProvider";
 
 export const metadata = {
   title: "Bank AI",
@@ -17,8 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={poppins.className} suppressHydrationWarning>{children}</body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body className={poppins.className} suppressHydrationWarning>
+          {children}
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

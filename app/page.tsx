@@ -1,6 +1,9 @@
 "use client";
 import { get_data } from "@/src/service";
+import { setContent } from "@/store/reducers/content";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
   const [state, setState] = useState<any>({
@@ -9,7 +12,9 @@ export default function Home() {
     fileMetadata: null,
   });
   const [file, setFile] = useState<any>(null);
-  const [fileContent, setFileContent] = useState<Array<any>>([]);
+  const dispatch = useDispatch();
+  const contentStore = useSelector((state: any) => state.content);
+  const router = useRouter();
 
   const handleImageChange = (e: any) => {
     e.preventDefault();
@@ -19,9 +24,13 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       const result = await get_data("statement");
-      setFileContent(result);
+      dispatch(setContent(result));
     })();
   }, [file]);
+
+  if (contentStore.content) {
+    router.push("/analyze");
+  }
 
   return (
     <main>
